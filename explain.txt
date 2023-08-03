@@ -1,0 +1,45 @@
+{
+    "name": "The YT Bookmarks",
+    "version": "0.1.0",
+    "description": "Saving timestamps in YT videos",
+    ****//to use the chrome.storage api and chrome.tab api
+    "permissions": ["storage", "tabs"],
+    "host_permissions": ["https://*.youtube.com/*"],
+    "background": {
+        //in externsion v3
+        //js files that run seperately from main browser file
+        //this means that the service worker will not have access to contentental webpage
+        //but it can speak with the extensions
+      "service_worker": "background.js"
+    },
+    //use contents to maupulate the dom
+    "content_scripts": [
+      {
+        "matches": ["https://*.youtube.com/*"],
+        "js": ["contentScript.js"]
+      }
+    ],
+    "web_accessible_resources": [
+      {
+        "resources": [
+          "assets/bookmark.png",
+          "assets/play.png",
+          "assets/delete.png",
+          "assets/save.png"
+        ],
+        "matches": ["https://*.youtube.com/*"]
+      }
+    ],
+    "action": {
+      "default_icon": {
+        "16": "assets/ext-icon.png",
+        "24": "assets/ext-icon.png",
+        "32": "assets/ext-icon.png"
+      },
+      "default_title": "My YT Bookmarks",
+      "default_popup": "popup.html"
+      //while file was serverd as a UI
+      //this helps in interactivity with pop.js file
+    },
+    "manifest_version": 3
+}
